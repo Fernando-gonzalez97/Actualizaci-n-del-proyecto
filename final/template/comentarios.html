@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="container-wrap">
+    <div id="fh5co-blog">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Comentarios</h2>
+            </div>
+        </div>
+
+        <!-- Formulario de comentario -->
+        {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="fh5co-blog animate-box">
+                    <h3>Agregar Comentario</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea name="contenido" class="form-control" rows="4" placeholder="Escribe tu comentario..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Publicar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!--comentarios -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% for i in comentarios %}
+                <div class="fh5co-blog animate-box">
+                    <h3><strong>{{ i.usuario.username }}</strong></h3>
+                    <p>{{ i.contenido }}</p>
+                    <p><small class="text-muted">{{ i.fecha_creacion|date:"d/m/Y H:i" }}</small></p>
+                </div>
+                {% empty %}
+                <p>No hay comentarios aún.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

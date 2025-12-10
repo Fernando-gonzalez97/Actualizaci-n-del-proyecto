@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+{% for i in articulos %}
+<br>
+<li>{{ i.titulo }}</li>
+<li>{{ i.resumen }}</li>
+<li>{{ i.categoria }}</li>
+
+{% endfor %}
+
+{% endblock contenido %}
