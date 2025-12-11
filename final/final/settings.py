@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'apps.articulos',
     'apps.comentarios',
     'apps.contacto',
-    #'apps.usuario',
 ]
+
+    #'apps.usuario',
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,7 +61,7 @@ ROOT_URLCONF = 'final.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'template'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = '../final/media/'
+
+# mensajes
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página de Inicio{% endblock title %}
+
+{% block contenido %}
+
+<!-- Hero Section con imagen -->
+<aside id="fh5co-hero">
+    <div class="flexslider">
+        <ul class="slides">
+            <li style="background-image: url({% static 'images/NOMBRE_DE_IMAGEN.jpg' %});">
+                <div class="overlay-gradient"></div>
+                <div class="container-fluids">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 slider-text slider-text-bg">
+                            <div class="slider-text-inner text-center">
+                                <h1>Bienvenido a Nuestro Proyecto</h1>
+                                <h2>Explora nuestros artículos y comparte tu opinión</h2>
+                                <p><a class="btn btn-primary btn-demo" href="{% url 'articulos' %}">Ver Artículos</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<!-- Sección de características -->
+<div id="fh5co-services" class="fh5co-bg-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center animate-box">
+                <div class="services">
+                    <span class="icon"><i class="icon-browser"></i></span>
+                    <div class="desc">
+                        <h3>Artículos</h3>
+                        <p>Lee nuestros últimos artículos sobre diversos temas de interés</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center animate-box">
+                <div class="services">
+                    <span class="icon"><i class="icon-chat"></i></span>
+                    <div class="desc">
+                        <h3>Comentarios</h3>
+                        <p>Comparte tu opinión y comenta en nuestros artículos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center animate-box">
+                <div class="services">
+                    <span class="icon"><i class="icon-mail"></i></span>
+                    <div class="desc">
+                        <h3>Contacto</h3>
+                        <p>¿Tienes alguna pregunta? Contáctanos cuando quieras</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
