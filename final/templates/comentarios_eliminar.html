@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="container-wrap">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <h2>Eliminar Comentario</h2>
+            
+            <div class="alert alert-warning">
+                <p>¿Estás seguro que deseas eliminar este comentario?</p>
+                <p><strong>"{{ comentario.contenido }}"</strong></p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+                <a href="{% url 'comentarios' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
