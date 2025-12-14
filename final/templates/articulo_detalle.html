@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ articulo.titulo }}{% endblock title %}
+
+{% block contenido %}
+<div id="fh5co-blog">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>{{ articulo.titulo }}</h2>
+                <p class="text-muted">Publicado el {{ articulo.fecha_publicacion }} | Categoría: {{ articulo.categoria.nombre }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% if articulo.imagen %}
+                <div class="blog-img" style="margin-bottom: 30px;">
+                    <img src="{{ articulo.imagen.url }}" class="img-responsive" alt="{{ articulo.titulo }}">
+                </div>
+                {% endif %}
+                
+                <div class="blog-text">
+                    <p>{{ articulo.contenido|linebreaks }}</p>
+                </div>
+
+                <hr>
+
+                <!-- Sección de Comentarios -->
+                <div class="comentarios-section" style="margin-top: 50px;">
+                    <h3>Comentarios ({{ comentarios.count }})</h3>
+                    
+                    {% if comentarios %}
+                        {% for comentario in comentarios %}
+                        <div class="comentario" style="background: #f8f8f8; padding: 15px; margin-bottom: 15px; border-radius: 5px;">
+                            <p><strong>{{ comentario.usuario.username }}</strong> 
+                            <small class="text-muted">- {{ comentario.fecha_creacion|date:"d/m/Y H:i" }}</small></p>
+                            <p>{{ comentario.contenido }}</p>
+                            
+                            {% if user == comentario.usuario %}
+                            <div>
+                                <a href="{% url 'editar_comentario' comentario.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{% url 'eliminar_comentario' comentario.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                    {% endif %}
+
+                    <!--agregar comentario -->
+                    {% if user.is_authenticated %}
+                    <div style="margin-top: 30px;">
+                        <h4>Agregar un comentario</h4>
+                        <form method="POST" action="{% url 'comentarios' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="articulo_id" value="{{ articulo.pk }}">
+                            <div class="form-group">
+                                <textarea name="contenido" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Comentario</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p class="text-muted" style="margin-top: 30px;">
+                        <a href="{% url 'admin:login' %}">Inicia sesión</a> para dejar un comentario.
+                    </p>
+                    {% endif %}
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="{% url 'articulos' %}" class="btn btn-default">← Volver a Artículos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

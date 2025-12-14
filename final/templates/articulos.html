@@ -3,12 +3,35 @@
 
 {% block contenido %}
 
-{% for i in articulos %}
-<br>
-<li>{{ i.titulo }}</li>
-<li>{{ i.resumen }}</li>
-<li>{{ i.categoria }}</li>
-
-{% endfor %}
+<div id="fh5co-blog">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Artículos</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for articulo in articulos %}
+            <div class="col-md-4">
+                <div class="fh5co-blog animate-box">
+                    {% if articulo.imagen %}
+                    <a href="{% url 'articulo_detalle' articulo.pk %}">
+                        <img src="{{ articulo.imagen.url }}" class="img-responsive" alt="{{ articulo.titulo }}">
+                    </a>
+                    {% endif %}
+                    <div class="blog-text">
+                        <h3><a href="{% url 'articulo_detalle' articulo.pk %}">{{ articulo.titulo }}</a></h3>
+                        <span class="posted_on">{{ articulo.fecha_publicacion }}</span>
+                        <span class="comment"><a href="{% url 'articulo_detalle' articulo.pk %}">Categoría: {{ articulo.categoria }}</a></span>
+                        <p>{{ articulo.resumen }}</p>
+                        <a href="{% url 'articulo_detalle' articulo.pk %}" class="btn btn-primary">Leer más</a>
+                    </div> 
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock contenido %}
